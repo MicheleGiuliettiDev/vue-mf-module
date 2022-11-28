@@ -1,6 +1,6 @@
 
 import { VueConstructor } from "vue/types/umd";
-import Screen from "../components/screen";
+// import Screen from "../components/screen";
 
 export interface IProjectableModel<T> {
   data: T; resolve: (item: T) => void; reject: () => void;
@@ -11,10 +11,10 @@ export class Projector {
   static get Instance(): Projector { return Projector.instance }
   static set Instance(v: Projector) { this.instance = v; }
 
-  private screens = new Map<string, Screen>();
+  private screens = new Map<string, any>();
   private projecting = new Map<string, { component: VueConstructor, model: IProjectableModel<any>, promise: Promise<any> | null, queue: boolean }[]>();
 
-  setScreen(screen, name: string = "defaultscreen") {
+  setScreen(screen: any, name: string = "defaultscreen") {
     this.screens.set(name, screen);
   }
 
@@ -36,8 +36,8 @@ export class Projector {
 
     let ss = this.screens.get(screen);
     if (!ss) return null;
-    ss.model = model;
-    ss.currentView = component;
+    ss.model.value = model;
+    ss.currentView.value = component;
 
     if (promise) promise.then(() => this.stopProjecting(screen)).catch(() => this.stopProjecting(screen));
     return promise;
@@ -54,8 +54,8 @@ export class Projector {
 
     let _screen = this.screens.get(screen)
     if (_screen && _screen.currentView) {
-      _screen.currentView = null;
-      _screen.model = null;
+      _screen.model.value = null;
+      _screen.screenModel.value = null;
 
       if (this.projecting.has(screen)) {
         let s = this.projecting.get(screen);

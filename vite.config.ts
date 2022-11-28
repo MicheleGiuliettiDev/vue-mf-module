@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 import path from "path";
-import typescript from "@rollup/plugin-typescript";
+import dts from "vite-plugin-dts";
 
 
 const resolvePath = (str: string) => path.resolve(__dirname, str)
@@ -9,14 +9,21 @@ const resolvePath = (str: string) => path.resolve(__dirname, str)
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve:{
+    alias: []
+  },
   plugins: [
-    vue()
+    vue(),
+    dts({
+      entryRoot: "./src/",
+      skipDiagnostics: true
+    })
   ],
   build: {
-    lib:{
+    lib: {
       entry: "./src/index.ts",
       name: "VueMfModule",
-      fileName: "vue-mf-module"
+      fileName: (format) => `vue-mf-module.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -29,17 +36,7 @@ export default defineConfig({
         globals: {
           vue: 'Vue'
         }
-      },
-      // plugins: [
-      //   typescript({
-      //     'target': 'esnext',
-      //     'rootDir': './src',
-      //     'declaration': true,
-      //     'declarationDir': '../@types',
-      //     exclude: './node_modules/**',
-      //     allowSyntheticDefaultImports: true
-      //   })
-      // ]
+      }
     }
   }
 })

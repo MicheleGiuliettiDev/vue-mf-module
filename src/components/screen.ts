@@ -5,15 +5,15 @@ export default defineComponent({
   props: {
     name: { type: String, default: "defaultscreen" },
   },
-  template: `<div v-show="isVisible"><component v-if="currentView" v-bind:is="currentView" :value="screenModel" :key="screenModel"></component></div>`,
+  template: `<div v-show="isVisible"><component v-if="currentView" v-bind:is="currentView" :value="model" :key="model"></component></div>`,
   setup(props, {expose}) {
     
     const me = getCurrentInstance();
 
     const currentView: Ref<any> = ref(null);
-    const screenModel: Ref<IProjectableModel<any> | null> = ref(null!);
+    const model: Ref<IProjectableModel<any> | null> = ref(null!);
 
-    expose({ currentView, screenModel })
+    expose({ currentView, model })
 
     const isVisible = computed(() => {
       return currentView.value != null;
@@ -25,7 +25,7 @@ export default defineComponent({
 
     return {
       currentView,
-      screenModel,
+      model,
       isVisible
     }
   }
