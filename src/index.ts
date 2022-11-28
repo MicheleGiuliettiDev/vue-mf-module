@@ -1,4 +1,4 @@
-import { IMenuDefinition, MenuHelper, menuType } from "./helpers/MenuHelper";
+import { type IMenuDefinition, MenuHelper, menuType } from "./helpers/MenuHelper";
 import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
 import { IRouteConfig } from "./interfaces/RouterInterfaces";
@@ -6,7 +6,7 @@ import { IStore } from "./interfaces/StoreInterfaces";
 import Inject from "./components/inject";
 import Screen from "./components/screen";
 import { VueConstructor } from "vue";
-import { Projector, IProjectableModel, Projectable } from "./helpers/Projector";
+import { Projector, type IProjectableModel, type Projectable } from "./helpers/Projector";
 import directives, { ScreensManager } from "./directives/screen";
 import { validate as ValidateDirective } from "./directives/validate";
 
