@@ -1,11 +1,6 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
-import path from "path";
 import dts from "vite-plugin-dts";
-
-
-const resolvePath = (str: string) => path.resolve(__dirname, str)
-
 
 // https://vitejs.dev/config/
 export default defineConfig({
