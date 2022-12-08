@@ -1,7 +1,7 @@
 var G = Object.defineProperty;
 var N = (n, e, t) => e in n ? G(n, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[e] = t;
 var o = (n, e, t) => (N(n, typeof e != "symbol" ? e + "" : e, t), t);
-import { defineComponent as C, defineEmits as P, computed as w, getCurrentInstance as L, ref as S, onMounted as B } from "vue";
+import { defineComponent as C, computed as w, getCurrentInstance as P, ref as S, onMounted as L } from "vue";
 var k = { exports: {} };
 function j() {
 }
@@ -29,7 +29,7 @@ j.prototype = {
   off: function(n, e) {
     var t = this.e || (this.e = {}), i = t[n], r = [];
     if (i && e)
-      for (var s = 0, c = i.length; s < c; s++)
+      for (var s = 0, u = i.length; s < u; s++)
         i[s].fn !== e && i[s].fn._ !== e && r.push(i[s]);
     return r.length ? t[n] = r : delete t[n], this;
   }
@@ -64,11 +64,11 @@ const T = {
     let t = [], i = /* @__PURE__ */ new Set();
     for (const r in this.menuStructure[e]) {
       const s = this.menuStructure[e][r];
-      let c = {
+      let u = {
         item: this.menuDefinitions.find((a) => a.name == r && (!a.hidden || !a.hidden())),
-        children: s.map((a) => this.menuDefinitions.find((u) => u.name == a && (!u.hidden || !u.hidden()))).filter((a) => !!a).sort((a, u) => a && u && a.orderIndex && u.orderIndex && a.orderIndex > u.orderIndex ? 1 : a && u && a.orderIndex && u.orderIndex && a.orderIndex < u.orderIndex ? -1 : 0)
+        children: s.map((a) => this.menuDefinitions.find((c) => c.name == a && (!c.hidden || !c.hidden()))).filter((a) => !!a).sort((a, c) => a && c && a.orderIndex && c.orderIndex && a.orderIndex > c.orderIndex ? 1 : a && c && a.orderIndex && c.orderIndex && a.orderIndex < c.orderIndex ? -1 : 0)
       };
-      c.item && (i.add(r), s.forEach((a) => i.add(a)), t.push(c));
+      u.item && (i.add(r), s.forEach((a) => i.add(a)), t.push(u));
     }
     return t.filter((r) => !!r.item).sort((r, s) => r && s && r.item && s.item && r.item.orderIndex && s.item.orderIndex && r.item.orderIndex > s.item.orderIndex ? 1 : r && s && r.item && s.item && r.item.orderIndex && s.item.orderIndex && r.item.orderIndex < s.item.orderIndex ? -1 : 0);
   }
@@ -182,17 +182,17 @@ const V = C({
     disabled: { type: Boolean, default: !1 },
     readonly: { type: Boolean, default: !1 }
   },
-  template: '<div><component :is="c"  v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id" :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" /></div>',
-  setup(n) {
-    const e = P(["input", "click", "save"]), t = w({
+  template: '<div><component :is="c" v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id" :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" /></div>',
+  setup(n, { emit: e }) {
+    const t = w({
       get: () => n.value,
-      set: (c) => {
-        e("input", c);
+      set: (u) => {
+        e("input", u);
       }
-    }), i = w(() => n.name ? [l.Instance.getComponent(n.name, n.group)] : n.group ? l.Instance.getGroupComponents(n.group, ...n.names || []) : l.Instance.getComponents(...n.names || [])), r = (...c) => {
-      e("click", ...c);
-    }, s = (...c) => {
-      e("save", ...c);
+    }), i = w(() => n.name ? [l.Instance.getComponent(n.name, n.group)] : n.group ? l.Instance.getGroupComponents(n.group, ...n.names || []) : l.Instance.getComponents(...n.names || [])), r = (...u) => {
+      e("click", ...u);
+    }, s = (...u) => {
+      e("save", ...u);
     };
     return {
       id: n.id,
@@ -225,13 +225,13 @@ const V = C({
     this.screens.set(t, e);
   }
   projectTo(e, t = null, i = "defaultscreen", r = !0, s = !1) {
-    var c = { data: t };
+    var u = { data: t };
     let a = s ? new Promise(($, O) => {
-      c.reject = O, c.resolve = $;
+      u.reject = O, u.resolve = $;
     }) : null;
-    r ? (this.projecting.has(i) || this.projecting.set(i, []), (this.projecting.get(i) || []).push({ component: e, model: c, promise: a, queue: r })) : this.projecting.set(i, [{ component: e, model: c, promise: a, queue: r }]);
-    let u = this.screens.get(i);
-    return u ? (u.model.value = c, u.currentView.value = e, a && a.then(() => this.stopProjecting(i)).catch(() => this.stopProjecting(i)), a) : null;
+    r ? (this.projecting.has(i) || this.projecting.set(i, []), (this.projecting.get(i) || []).push({ component: e, model: u, promise: a, queue: r })) : this.projecting.set(i, [{ component: e, model: u, promise: a, queue: r }]);
+    let c = this.screens.get(i);
+    return c ? (c.model.value = u, c.currentView.value = e, a && a.then(() => this.stopProjecting(i)).catch(() => this.stopProjecting(i)), a) : null;
   }
   projectAsyncTo(e, t, i = "defaultscreen", r = !0) {
     return this.projectTo(e, t, i, r, !0);
@@ -254,17 +254,17 @@ const V = C({
 };
 let g = y;
 o(g, "instance", new y());
-const E = C({
+const D = C({
   name: "screen",
   props: {
     name: { type: String, default: "defaultscreen" }
   },
   template: '<div v-show="isVisible"><component v-if="currentView" v-bind:is="currentView" :value="model" :key="model"></component></div>',
   setup(n, { expose: e }) {
-    const t = L(), i = S(null), r = S(null);
+    const t = P(), i = S(null), r = S(null);
     e({ currentView: i, model: r });
     const s = w(() => i.value != null);
-    return B(() => {
+    return L(() => {
       g.Instance.setScreen(t, n.name);
     }), {
       currentView: i,
@@ -272,20 +272,20 @@ const E = C({
       isVisible: s
     };
   }
-}), F = {
+}), B = {
   inserted: (n, e) => {
     d.Instance.injectTo(n, e.arg);
   },
   unbind: (n, e) => {
     d.Instance.removeFrom(n, e.arg);
   }
-}, R = {
+}, F = {
   bind: (n, e) => {
     !n || d.Instance.setScreen(n, e.arg);
   }
 }, M = {
-  projectToDirective: F,
-  screenDirective: R
+  projectToDirective: B,
+  screenDirective: F
 }, I = class {
   constructor() {
     o(this, "screens", /* @__PURE__ */ new Map());
@@ -341,7 +341,7 @@ function v(n, e) {
     }
   }
 }
-const D = {
+const E = {
   inserted: (n, e) => {
     if (!(!n || !n.willValidate)) {
       switch (n.nodeName) {
@@ -359,14 +359,14 @@ const D = {
   unbind: (n) => {
   }
 };
-function U(n) {
-  n.component("screen", E), n.component("inject", V), n.directive("screen", M.screenDirective), n.directive("projectTo", M.projectToDirective), n.directive("validate", D);
+function R(n) {
+  n.component("screen", D), n.component("inject", V), n.directive("screen", M.screenDirective), n.directive("projectTo", M.projectToDirective), n.directive("validate", E);
 }
-function J(n) {
+function X(n) {
   let e = {};
   return {
     init(t, i, r, s) {
-      return s.registry && (l.Instance = s.registry), s.messageService && (h.Instance = s.messageService), s.projector && (g.Instance = s.projector), s.screens && (d.Instance = s.screens), e = r, n.init(z, t, i, r);
+      return s.registry && (l.Instance = s.registry), s.messageService && (h.Instance = s.messageService), s.projector && (g.Instance = s.projector), s.screens && (d.Instance = s.screens), e = r, n.init(U, t, i, r);
     },
     config(t, i) {
       return n.config ? n.config(t, i, e) : null;
@@ -377,7 +377,7 @@ function J(n) {
     routes: n.routes
   };
 }
-function Q(n, e, t) {
+function J(n, e, t) {
   const i = n.default.default || n.default;
   return i.init(
     f.Instance,
@@ -391,31 +391,31 @@ function Q(n, e, t) {
     }
   ).then(() => i);
 }
-function W(n, e) {
+function Q(n, e) {
   return (n.default.default || n.default).config(f.Instance, e);
 }
-function Y(n, e) {
+function W(n, e) {
   return (n.default.default || n.default).run(f.Instance, e);
 }
-function Z(n) {
+function Y(n) {
   return (n.default.default || n.default).routes;
 }
-const z = {
-  install: U,
+const U = {
+  install: R,
   MenuHelper: new f(),
   menuType: b,
   CommonRegistry: new l(),
   MessageService: new h(),
   Inject: V,
-  Screen: E,
-  ValidateDirective: D,
+  Screen: D,
+  ValidateDirective: E,
   MenuNotifications: T
 };
 export {
-  W as ConfigModule,
-  Q as InitModule,
-  J as ModuleInitializer,
-  Z as ModuleRoutes,
-  Y as RunModule,
-  z as default
+  Q as ConfigModule,
+  J as InitModule,
+  X as ModuleInitializer,
+  Y as ModuleRoutes,
+  W as RunModule,
+  U as default
 };

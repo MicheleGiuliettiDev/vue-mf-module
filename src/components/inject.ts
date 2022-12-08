@@ -1,4 +1,4 @@
-import { computed, defineComponent, defineEmits } from "vue";
+import { computed, defineComponent } from "vue";
 import { CommonRegistry } from "../helpers/CommonRegistry";
 
 
@@ -15,9 +15,9 @@ export default defineComponent({
     disabled: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false }
   },
-  template: `<div><component :is="c"  v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id" :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" /></div>`,
-  setup(props) {
-    const emit = defineEmits(["input", "click", "save"])
+  template: `<div><component :is="c" v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id" :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" /></div>`,
+  setup(props, { emit }) {
+
 
     const Value = computed({
       get: () => { return props.value },
