@@ -1,5 +1,7 @@
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, defineEmits } from "vue";
 import { CommonRegistry } from "../helpers/CommonRegistry";
+
+
 
 export default defineComponent({
   props: {
@@ -16,13 +18,13 @@ export default defineComponent({
   template: `<div><component :is="c"  v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id" :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" /></div>`,
   setup(props) {
     const emit = defineEmits(["input", "click", "save"])
+
     const Value = computed({
       get: () => { return props.value },
       set: (v) => { emit("input", v); }
     })
 
     const Components = computed(() => {
-
       if (props.name)
         return [CommonRegistry.Instance.getComponent(props.name, props.group)];
       if (props.group)

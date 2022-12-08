@@ -1,4 +1,4 @@
-import { type IMenuDefinition, MenuHelper, menuType } from "./helpers/MenuHelper";
+import { MenuHelper, menuType, MenuNotifications } from "./helpers/MenuHelper";
 import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
 import { IRouteConfig } from "./interfaces/RouterInterfaces";
@@ -6,20 +6,9 @@ import { IStore } from "./interfaces/StoreInterfaces";
 import Inject from "./components/inject";
 import Screen from "./components/screen";
 import { VueConstructor } from "vue";
-import { Projector, type IProjectableModel, type Projectable } from "./helpers/Projector";
+import { Projector } from "./helpers/Projector";
 import directives, { ScreensManager } from "./directives/screen";
 import { validate as ValidateDirective } from "./directives/validate";
-
-
-export {
-  MenuHelper,
-  IMenuDefinition,
-  menuType,
-  CommonRegistry,
-  MessageService,
-  Inject, Screen,
-  ValidateDirective, Projectable, IProjectableModel
-}
 
 
 function install(Vue: VueConstructor<Vue>) {
@@ -29,20 +18,14 @@ function install(Vue: VueConstructor<Vue>) {
   Vue.directive("projectTo", directives.projectToDirective);
   Vue.directive("validate", ValidateDirective as any);
 }
-export default { install }
+
 
 export interface IModuleInitializer {
-  init(menu: MenuHelper,
-    store: IStore,
-    configuration: any): Promise<void>,
+  init(vuemf: typeof VueMfModule, menu: MenuHelper, store: IStore, configuration: any): Promise<void>,
 
-  config?(menu: MenuHelper,
-    store: IStore,
-    configuration: any): Promise<void>,
+  config?(menu: MenuHelper, store: IStore, configuration: any): Promise<void>,
 
-  run?(menu: MenuHelper,
-    store: IStore,
-    configuration: any): Promise<void>,
+  run?(menu: MenuHelper, store: IStore, configuration: any): Promise<void>,
 
   routes: IRouteConfig[]
 }
@@ -80,7 +63,7 @@ export function ModuleInitializer(opts: IModuleInitializer) {
       if (options.projector) Projector.Instance = options.projector;
       if (options.screens) ScreensManager.Instance = options.screens;
       moduleConfig = configuration;
-      return opts.init(menu, store, configuration);
+      return opts.init(VueMfModule, menu, store, configuration);
     },
     config(menu: MenuHelper, store: IStore) {
       return opts.config ? opts.config(menu, store, moduleConfig) : null;
@@ -120,3 +103,27 @@ export function ModuleRoutes(module: any): IRouteConfig[] {
   const initobj = (module.default.default || module.default) as IModuleInitializerWrapper;
   return initobj.routes;
 }
+
+// export {
+//   MenuHelper,
+//   IMenuDefinition,
+//   menuType,
+//   CommonRegistry,
+//   MessageService,
+//   Inject, Screen,
+//   ValidateDirective, Projectable, IProjectableModel
+// }
+
+const VueMfModule = {
+  install,
+  MenuHelper: new MenuHelper(),
+  menuType,
+  CommonRegistry: new CommonRegistry(),
+  MessageService: new MessageService(),
+  Inject,
+  Screen,
+  ValidateDirective,
+  MenuNotifications
+}
+
+export default VueMfModule;

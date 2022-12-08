@@ -2,12 +2,13 @@ import Vue, { computed, defineComponent, getCurrentInstance, onMounted, Ref, ref
 import { IProjectableModel, Projector } from "../helpers/Projector";
 
 export default defineComponent({
+  name: "screen",
   props: {
     name: { type: String, default: "defaultscreen" },
   },
   template: `<div v-show="isVisible"><component v-if="currentView" v-bind:is="currentView" :value="model" :key="model"></component></div>`,
-  setup(props, {expose}) {
-    
+  setup(props, { expose }) {
+
     const me = getCurrentInstance();
 
     const currentView: Ref<any> = ref(null);

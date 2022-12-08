@@ -1,11 +1,11 @@
-var E = Object.defineProperty;
-var V = (n, e, t) => e in n ? E(n, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[e] = t;
-var o = (n, e, t) => (V(n, typeof e != "symbol" ? e + "" : e, t), t);
-import { defineComponent as C, computed as j, getCurrentInstance as D, ref as S, onMounted as $ } from "vue";
+var G = Object.defineProperty;
+var N = (n, e, t) => e in n ? G(n, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[e] = t;
+var o = (n, e, t) => (N(n, typeof e != "symbol" ? e + "" : e, t), t);
+import { defineComponent as C, defineEmits as P, computed as w, getCurrentInstance as L, ref as S, onMounted as B } from "vue";
 var k = { exports: {} };
-function w() {
+function j() {
 }
-w.prototype = {
+j.prototype = {
   on: function(n, e, t) {
     var i = this.e || (this.e = {});
     return (i[n] || (i[n] = [])).push({
@@ -34,9 +34,9 @@ w.prototype = {
     return r.length ? t[n] = r : delete t[n], this;
   }
 };
-k.exports = w;
-var A = k.exports.TinyEmitter = w, O = /* @__PURE__ */ ((n) => (n[n.drawer = 0] = "drawer", n[n.bottom = 1] = "bottom", n[n.header = 2] = "header", n))(O || {});
-const G = {
+k.exports = j;
+var A = k.exports.TinyEmitter = j, b = /* @__PURE__ */ ((n) => (n[n.drawer = 0] = "drawer", n[n.bottom = 1] = "bottom", n[n.header = 2] = "header", n))(b || {});
+const T = {
   menuDefinitionAdded: "newmenuitem"
 }, m = class {
   constructor() {
@@ -55,7 +55,7 @@ const G = {
     i ? e = i : this.menuDefinitions.push(e);
     for (const r of t)
       this.menuStructure[r.section] = this.menuStructure[r.section] || {}, this.menuStructure[r.section][r.parent || e.name] = this.menuStructure[r.section][r.parent || e.name] || [], r.parent && this.menuStructure[r.section][r.parent].push(e.name);
-    this.notifications.emit(G.menuDefinitionAdded, e);
+    this.notifications.emit(T.menuDefinitionAdded, e);
   }
   getMenuItem(e) {
     return this.menuDefinitions.find((t) => t.name == e);
@@ -168,9 +168,9 @@ const p = class {
     });
   }
 };
-let v = p;
-o(v, "instance", new p());
-const N = C({
+let h = p;
+o(h, "instance", new p());
+const V = C({
   props: {
     id: { default: null },
     type: { default: null, type: String },
@@ -184,12 +184,12 @@ const N = C({
   },
   template: '<div><component :is="c"  v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id" :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" /></div>',
   setup(n) {
-    const e = defineEmits(["input", "click", "save"]), t = j({
+    const e = P(["input", "click", "save"]), t = w({
       get: () => n.value,
       set: (c) => {
         e("input", c);
       }
-    }), i = j(() => n.name ? [l.Instance.getComponent(n.name, n.group)] : n.group ? l.Instance.getGroupComponents(n.group, ...n.names || []) : l.Instance.getComponents(...n.names || [])), r = (...c) => {
+    }), i = w(() => n.name ? [l.Instance.getComponent(n.name, n.group)] : n.group ? l.Instance.getGroupComponents(n.group, ...n.names || []) : l.Instance.getComponents(...n.names || [])), r = (...c) => {
       e("click", ...c);
     }, s = (...c) => {
       e("save", ...c);
@@ -226,8 +226,8 @@ const N = C({
   }
   projectTo(e, t = null, i = "defaultscreen", r = !0, s = !1) {
     var c = { data: t };
-    let a = s ? new Promise((b, T) => {
-      c.reject = T, c.resolve = b;
+    let a = s ? new Promise(($, O) => {
+      c.reject = O, c.resolve = $;
     }) : null;
     r ? (this.projecting.has(i) || this.projecting.set(i, []), (this.projecting.get(i) || []).push({ component: e, model: c, promise: a, queue: r })) : this.projecting.set(i, [{ component: e, model: c, promise: a, queue: r }]);
     let u = this.screens.get(i);
@@ -252,39 +252,40 @@ const N = C({
     return !1;
   }
 };
-let h = y;
-o(h, "instance", new y());
-const P = C({
+let g = y;
+o(g, "instance", new y());
+const E = C({
+  name: "screen",
   props: {
     name: { type: String, default: "defaultscreen" }
   },
   template: '<div v-show="isVisible"><component v-if="currentView" v-bind:is="currentView" :value="model" :key="model"></component></div>',
   setup(n, { expose: e }) {
-    const t = D(), i = S(null), r = S(null);
+    const t = L(), i = S(null), r = S(null);
     e({ currentView: i, model: r });
-    const s = j(() => i.value != null);
-    return $(() => {
-      h.Instance.setScreen(t, n.name);
+    const s = w(() => i.value != null);
+    return B(() => {
+      g.Instance.setScreen(t, n.name);
     }), {
       currentView: i,
       model: r,
       isVisible: s
     };
   }
-}), L = {
+}), F = {
   inserted: (n, e) => {
     d.Instance.injectTo(n, e.arg);
   },
   unbind: (n, e) => {
     d.Instance.removeFrom(n, e.arg);
   }
-}, B = {
+}, R = {
   bind: (n, e) => {
     !n || d.Instance.setScreen(n, e.arg);
   }
 }, M = {
-  projectToDirective: L,
-  screenDirective: B
+  projectToDirective: F,
+  screenDirective: R
 }, I = class {
   constructor() {
     o(this, "screens", /* @__PURE__ */ new Map());
@@ -320,7 +321,7 @@ const P = C({
 };
 let d = I;
 o(d, "instance", new I());
-function g(n, e) {
+function v(n, e) {
   if (n.target.validity) {
     let t = n.target;
     if (t.validity) {
@@ -340,33 +341,32 @@ function g(n, e) {
     }
   }
 }
-const F = {
+const D = {
   inserted: (n, e) => {
     if (!(!n || !n.willValidate)) {
       switch (n.nodeName) {
         case "INPUT":
         case "TEXTAREA":
-          n.onblur = (t) => g(t, e.value);
+          n.onblur = (t) => v(t, e.value);
           break;
         case "SELECT":
-          n.onchange = (t) => g(t, e.value);
+          n.onchange = (t) => v(t, e.value);
           break;
       }
-      n.oninvalid = (t) => g(t, e.value), n.form && n.form.addEventListener("invalid", () => g({ target: n }, e.value)), e.arg == "immediate" ? n.reportValidity() : g({ target: n }, e.value);
+      n.oninvalid = (t) => v(t, e.value), n.form && n.form.addEventListener("invalid", () => v({ target: n }, e.value)), e.arg == "immediate" ? n.reportValidity() : v({ target: n }, e.value);
     }
   },
   unbind: (n) => {
   }
 };
 function U(n) {
-  n.component("screen", P), n.component("inject", N), n.directive("screen", M.screenDirective), n.directive("projectTo", M.projectToDirective), n.directive("validate", F);
+  n.component("screen", E), n.component("inject", V), n.directive("screen", M.screenDirective), n.directive("projectTo", M.projectToDirective), n.directive("validate", D);
 }
-const R = { install: U };
-function X(n) {
+function J(n) {
   let e = {};
   return {
     init(t, i, r, s) {
-      return s.registry && (l.Instance = s.registry), s.messageService && (v.Instance = s.messageService), s.projector && (h.Instance = s.projector), s.screens && (d.Instance = s.screens), e = r, n.init(t, i, r);
+      return s.registry && (l.Instance = s.registry), s.messageService && (h.Instance = s.messageService), s.projector && (g.Instance = s.projector), s.screens && (d.Instance = s.screens), e = r, n.init(z, t, i, r);
     },
     config(t, i) {
       return n.config ? n.config(t, i, e) : null;
@@ -377,7 +377,7 @@ function X(n) {
     routes: n.routes
   };
 }
-function J(n, e, t) {
+function Q(n, e, t) {
   const i = n.default.default || n.default;
   return i.init(
     f.Instance,
@@ -385,33 +385,37 @@ function J(n, e, t) {
     t || {},
     {
       registry: l.Instance,
-      messageService: v.Instance,
-      projector: h.Instance,
+      messageService: h.Instance,
+      projector: g.Instance,
       screens: d.Instance
     }
   ).then(() => i);
 }
-function Q(n, e) {
+function W(n, e) {
   return (n.default.default || n.default).config(f.Instance, e);
 }
-function W(n, e) {
+function Y(n, e) {
   return (n.default.default || n.default).run(f.Instance, e);
 }
-function Y(n) {
+function Z(n) {
   return (n.default.default || n.default).routes;
 }
+const z = {
+  install: U,
+  MenuHelper: new f(),
+  menuType: b,
+  CommonRegistry: new l(),
+  MessageService: new h(),
+  Inject: V,
+  Screen: E,
+  ValidateDirective: D,
+  MenuNotifications: T
+};
 export {
-  l as CommonRegistry,
-  Q as ConfigModule,
-  J as InitModule,
-  N as Inject,
-  f as MenuHelper,
-  v as MessageService,
-  X as ModuleInitializer,
-  Y as ModuleRoutes,
-  W as RunModule,
-  P as Screen,
-  F as ValidateDirective,
-  R as default,
-  O as menuType
+  W as ConfigModule,
+  Q as InitModule,
+  J as ModuleInitializer,
+  Z as ModuleRoutes,
+  Y as RunModule,
+  z as default
 };

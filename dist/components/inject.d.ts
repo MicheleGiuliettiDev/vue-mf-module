@@ -111,8 +111,8 @@ declare const _default: import("vue").DefineComponent<{
 }>>, {
     name: string;
     value: null;
-    id: null;
     type: string;
+    id: null;
     names: string[];
     group: string;
     metadata: Record<string, any>;
