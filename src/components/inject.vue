@@ -1,9 +1,17 @@
+<template>
+  <div>
+    <component :is="c" v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id"
+      :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" />
+  </div>
+</template>
+<script lang="ts">
 import { computed, defineComponent } from "vue";
 import { CommonRegistry } from "../helpers/CommonRegistry";
 
 
 
 export default defineComponent({
+  name: "inject",
   props: {
     id: { default: null },
     type: { default: null, type: String },
@@ -15,7 +23,6 @@ export default defineComponent({
     disabled: { type: Boolean, default: false },
     readonly: { type: Boolean, default: false }
   },
-  template: `<div><component :is="c" v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id" :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" /></div>`,
   setup(props, { emit }) {
 
 
@@ -52,4 +59,6 @@ export default defineComponent({
     }
   }
 
-})
+});
+
+</script>

@@ -1,12 +1,15 @@
-import { MenuHelper, menuType } from "./helpers/MenuHelper";
+import { MenuHelper, menuType, MenuNotifications, IMenuDefinition } from "./helpers/MenuHelper";
 import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
 import { IRouteConfig } from "./interfaces/RouterInterfaces";
 import { IStore } from "./interfaces/StoreInterfaces";
+import Inject from "./components/inject.vue";
+import Screen from "./components/screen.vue";
 import { VueConstructor } from "vue";
-import { Projector } from "./helpers/Projector";
+import { IProjectableModel, Projectable, Projector } from "./helpers/Projector";
 import { ScreensManager } from "./directives/screen";
-declare function install(Vue: VueConstructor<Vue>): void;
+import { validate as ValidateDirective } from "./directives/validate";
+declare function install(Vue: VueConstructor): void;
 export interface IModuleInitializer {
     init(vuemf: typeof VueMfModule, menu: MenuHelper, store: IStore, configuration: any): Promise<void>;
     config?(menu: MenuHelper, store: IStore, configuration: any): Promise<void>;
@@ -29,6 +32,7 @@ export declare function InitModule(module: any, store: IStore, configuration: an
 export declare function ConfigModule(module: any, store: IStore): Promise<void>;
 export declare function RunModule(module: any, store: IStore): Promise<void>;
 export declare function ModuleRoutes(module: any): IRouteConfig[];
+export { MenuHelper, type IMenuDefinition, menuType, CommonRegistry, MessageService, Inject, Screen, ValidateDirective, type Projectable, type IProjectableModel, MenuNotifications };
 declare const VueMfModule: {
     install: typeof install;
     MenuHelper: MenuHelper;
@@ -163,7 +167,7 @@ declare const VueMfModule: {
         };
     }, {
         currentView: import("vue").Ref<any>;
-        model: import("vue").Ref<import("./helpers/Projector").IProjectableModel<any> | null>;
+        model: import("vue").Ref<IProjectableModel<any> | null>;
         isVisible: import("vue").ComputedRef<boolean>;
     }, {}, {}, {}, import("vue/types/v3-component-options").ComponentOptionsMixin, import("vue/types/v3-component-options").ComponentOptionsMixin, {}, string, Readonly<import("vue").ExtractPropTypes<{
         name: {

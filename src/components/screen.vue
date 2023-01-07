@@ -1,3 +1,9 @@
+<template>
+  <div v-show="isVisible">
+    <component v-if="currentView" v-bind:is="currentView" :value="model" :key="model"></component>
+  </div>
+</template>
+<script lang="ts">
 import Vue, { computed, defineComponent, getCurrentInstance, onMounted, Ref, ref } from "vue";
 import { IProjectableModel, Projector } from "../helpers/Projector";
 
@@ -6,7 +12,6 @@ export default defineComponent({
   props: {
     name: { type: String, default: "defaultscreen" },
   },
-  template: `<div v-show="isVisible"><component v-if="currentView" v-bind:is="currentView" :value="model" :key="model"></component></div>`,
   setup(props, { expose }) {
 
     const me = getCurrentInstance();
@@ -31,3 +36,4 @@ export default defineComponent({
     }
   }
 })
+</script>

@@ -1,4 +1,4 @@
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     id: {
         default: null;
     };
@@ -119,4 +119,4 @@ declare const _default: import("vue").DefineComponent<{
     disabled: boolean;
     readonly: boolean;
 }>;
-export default _default;
+export default _sfc_main;

@@ -8,7 +8,9 @@ export default defineConfig({
     alias: []
   },
   plugins: [
-    vue(),
+    vue({
+      isProduction: true,
+    }),
     dts({
       entryRoot: "./src/",
       skipDiagnostics: true

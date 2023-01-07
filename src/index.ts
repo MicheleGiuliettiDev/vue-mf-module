@@ -1,17 +1,18 @@
-import { MenuHelper, menuType, MenuNotifications } from "./helpers/MenuHelper";
+import { MenuHelper, menuType, MenuNotifications, IMenuDefinition } from "./helpers/MenuHelper";
 import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
 import { IRouteConfig } from "./interfaces/RouterInterfaces";
 import { IStore } from "./interfaces/StoreInterfaces";
-import Inject from "./components/inject";
-import Screen from "./components/screen";
+import Inject from "./components/inject.vue";
+import Screen from "./components/screen.vue";
 import { VueConstructor } from "vue";
-import { Projector } from "./helpers/Projector";
+import { IProjectableModel, Projectable, Projector } from "./helpers/Projector";
 import directives, { ScreensManager } from "./directives/screen";
 import { validate as ValidateDirective } from "./directives/validate";
 
 
-function install(Vue: VueConstructor<Vue>) {
+function install(Vue: VueConstructor) {
+  console.debug("installing vue mf module")
   Vue.component("screen", Screen);
   Vue.component("inject", Inject);
   Vue.directive("screen", directives.screenDirective);
@@ -104,15 +105,19 @@ export function ModuleRoutes(module: any): IRouteConfig[] {
   return initobj.routes;
 }
 
-// export {
-//   MenuHelper,
-//   IMenuDefinition,
-//   menuType,
-//   CommonRegistry,
-//   MessageService,
-//   Inject, Screen,
-//   ValidateDirective, Projectable, IProjectableModel
-// }
+export {
+  MenuHelper,
+  type IMenuDefinition,
+  menuType,
+  CommonRegistry,
+  MessageService,
+  Inject,
+  Screen,
+  ValidateDirective,
+  type Projectable,
+  type IProjectableModel,
+  MenuNotifications
+}
 
 const VueMfModule = {
   install,

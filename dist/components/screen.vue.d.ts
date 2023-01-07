@@ -1,6 +1,6 @@
 import { Ref } from "vue";
 import { IProjectableModel } from "../helpers/Projector";
-declare const _default: import("vue").DefineComponent<{
+declare const _sfc_main: import("vue").DefineComponent<{
     name: {
         type: StringConstructor;
         default: string;
@@ -17,4 +17,4 @@ declare const _default: import("vue").DefineComponent<{
 }>>, {
     name: string;
 }>;
-export default _default;
+export default _sfc_main;

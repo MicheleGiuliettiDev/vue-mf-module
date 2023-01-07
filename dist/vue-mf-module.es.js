@@ -1,86 +1,86 @@
 var G = Object.defineProperty;
-var N = (n, e, t) => e in n ? G(n, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[e] = t;
-var o = (n, e, t) => (N(n, typeof e != "symbol" ? e + "" : e, t), t);
-import { defineComponent as C, computed as w, getCurrentInstance as P, ref as S, onMounted as L } from "vue";
+var U = (n, e, t) => e in n ? G(n, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[e] = t;
+var l = (n, e, t) => (U(n, typeof e != "symbol" ? e + "" : e, t), t);
+import { defineComponent as T, computed as C, getCurrentInstance as L, ref as V, onMounted as X } from "vue";
 var k = { exports: {} };
-function j() {
+function S() {
 }
-j.prototype = {
+S.prototype = {
   on: function(n, e, t) {
-    var i = this.e || (this.e = {});
-    return (i[n] || (i[n] = [])).push({
+    var r = this.e || (this.e = {});
+    return (r[n] || (r[n] = [])).push({
       fn: e,
       ctx: t
     }), this;
   },
   once: function(n, e, t) {
-    var i = this;
-    function r() {
-      i.off(n, r), e.apply(t, arguments);
+    var r = this;
+    function i() {
+      r.off(n, i), e.apply(t, arguments);
     }
-    return r._ = e, this.on(n, r, t);
+    return i._ = e, this.on(n, i, t);
   },
   emit: function(n) {
-    var e = [].slice.call(arguments, 1), t = ((this.e || (this.e = {}))[n] || []).slice(), i = 0, r = t.length;
-    for (i; i < r; i++)
-      t[i].fn.apply(t[i].ctx, e);
+    var e = [].slice.call(arguments, 1), t = ((this.e || (this.e = {}))[n] || []).slice(), r = 0, i = t.length;
+    for (r; r < i; r++)
+      t[r].fn.apply(t[r].ctx, e);
     return this;
   },
   off: function(n, e) {
-    var t = this.e || (this.e = {}), i = t[n], r = [];
-    if (i && e)
-      for (var s = 0, u = i.length; s < u; s++)
-        i[s].fn !== e && i[s].fn._ !== e && r.push(i[s]);
-    return r.length ? t[n] = r : delete t[n], this;
+    var t = this.e || (this.e = {}), r = t[n], i = [];
+    if (r && e)
+      for (var s = 0, u = r.length; s < u; s++)
+        r[s].fn !== e && r[s].fn._ !== e && i.push(r[s]);
+    return i.length ? t[n] = i : delete t[n], this;
   }
 };
-k.exports = j;
-var A = k.exports.TinyEmitter = j, b = /* @__PURE__ */ ((n) => (n[n.drawer = 0] = "drawer", n[n.bottom = 1] = "bottom", n[n.header = 2] = "header", n))(b || {});
-const T = {
+k.exports = S;
+var A = k.exports.TinyEmitter = S, D = /* @__PURE__ */ ((n) => (n[n.drawer = 0] = "drawer", n[n.bottom = 1] = "bottom", n[n.header = 2] = "header", n))(D || {});
+const E = {
   menuDefinitionAdded: "newmenuitem"
-}, m = class {
+}, y = class {
   constructor() {
-    o(this, "menuDefinitions", []);
-    o(this, "menuStructure", {});
-    o(this, "notifications", new A());
+    l(this, "menuDefinitions", []);
+    l(this, "menuStructure", {});
+    l(this, "notifications", new A());
   }
   get Notifications() {
     return this.notifications;
   }
   static get Instance() {
-    return m.instance;
+    return y.instance;
   }
   addMenuDefinition(e, ...t) {
-    let i = this.menuDefinitions.find((r) => r.name == e.name);
-    i ? e = i : this.menuDefinitions.push(e);
-    for (const r of t)
-      this.menuStructure[r.section] = this.menuStructure[r.section] || {}, this.menuStructure[r.section][r.parent || e.name] = this.menuStructure[r.section][r.parent || e.name] || [], r.parent && this.menuStructure[r.section][r.parent].push(e.name);
-    this.notifications.emit(T.menuDefinitionAdded, e);
+    let r = this.menuDefinitions.find((i) => i.name == e.name);
+    r ? e = r : this.menuDefinitions.push(e);
+    for (const i of t)
+      this.menuStructure[i.section] = this.menuStructure[i.section] || {}, this.menuStructure[i.section][i.parent || e.name] = this.menuStructure[i.section][i.parent || e.name] || [], i.parent && this.menuStructure[i.section][i.parent].push(e.name);
+    this.notifications.emit(E.menuDefinitionAdded, e);
   }
   getMenuItem(e) {
     return this.menuDefinitions.find((t) => t.name == e);
   }
   getMenu(e) {
-    let t = [], i = /* @__PURE__ */ new Set();
-    for (const r in this.menuStructure[e]) {
-      const s = this.menuStructure[e][r];
+    let t = [], r = /* @__PURE__ */ new Set();
+    for (const i in this.menuStructure[e]) {
+      const s = this.menuStructure[e][i];
       let u = {
-        item: this.menuDefinitions.find((a) => a.name == r && (!a.hidden || !a.hidden())),
-        children: s.map((a) => this.menuDefinitions.find((c) => c.name == a && (!c.hidden || !c.hidden()))).filter((a) => !!a).sort((a, c) => a && c && a.orderIndex && c.orderIndex && a.orderIndex > c.orderIndex ? 1 : a && c && a.orderIndex && c.orderIndex && a.orderIndex < c.orderIndex ? -1 : 0)
+        item: this.menuDefinitions.find((o) => o.name == i && (!o.hidden || !o.hidden())),
+        children: s.map((o) => this.menuDefinitions.find((a) => a.name == o && (!a.hidden || !a.hidden()))).filter((o) => !!o).sort((o, a) => o && a && o.orderIndex && a.orderIndex && o.orderIndex > a.orderIndex ? 1 : o && a && o.orderIndex && a.orderIndex && o.orderIndex < a.orderIndex ? -1 : 0)
       };
-      u.item && (i.add(r), s.forEach((a) => i.add(a)), t.push(u));
+      u.item && (r.add(i), s.forEach((o) => r.add(o)), t.push(u));
     }
-    return t.filter((r) => !!r.item).sort((r, s) => r && s && r.item && s.item && r.item.orderIndex && s.item.orderIndex && r.item.orderIndex > s.item.orderIndex ? 1 : r && s && r.item && s.item && r.item.orderIndex && s.item.orderIndex && r.item.orderIndex < s.item.orderIndex ? -1 : 0);
+    return t.filter((i) => !!i.item).sort((i, s) => i && s && i.item && s.item && i.item.orderIndex && s.item.orderIndex && i.item.orderIndex > s.item.orderIndex ? 1 : i && s && i.item && s.item && i.item.orderIndex && s.item.orderIndex && i.item.orderIndex < s.item.orderIndex ? -1 : 0);
   }
 };
-let f = m;
-o(f, "instance", new m());
-const x = class {
+let g = y;
+l(g, "instance", new y());
+const M = class {
   constructor() {
-    o(this, "registry", /* @__PURE__ */ new Map());
-    o(this, "groupedregistry", /* @__PURE__ */ new Map());
-    o(this, "serviceregistry", /* @__PURE__ */ new Map());
-    o(this, "groupedserviceregistry", /* @__PURE__ */ new Map());
+    l(this, "registry", /* @__PURE__ */ new Map());
+    l(this, "groupedregistry", /* @__PURE__ */ new Map());
+    l(this, "serviceregistry", /* @__PURE__ */ new Map());
+    l(this, "groupedserviceregistry", /* @__PURE__ */ new Map());
   }
   static get Instance() {
     return this.instance;
@@ -88,11 +88,11 @@ const x = class {
   static set Instance(e) {
     this.instance = e;
   }
-  provideComponent(e, t, i) {
-    if (this.registry.set(i ? `${i}-${t}` : t, e), i) {
-      this.groupedregistry.has(i) || this.groupedregistry.set(i, /* @__PURE__ */ new Map());
-      let r = this.groupedregistry.get(i);
-      r && r.set(t, e);
+  provideComponent(e, t, r) {
+    if (this.registry.set(r ? `${r}-${t}` : t, e), r) {
+      this.groupedregistry.has(r) || this.groupedregistry.set(r, /* @__PURE__ */ new Map());
+      let i = this.groupedregistry.get(r);
+      i && i.set(t, e);
     }
   }
   getComponent(e, t) {
@@ -102,36 +102,36 @@ const x = class {
     return Array.from(this.registry.entries()).filter((t) => e.indexOf(t[0]) >= 0).map((t) => t[1]);
   }
   getGroupComponents(e, ...t) {
-    let i = this.groupedregistry.get(e);
-    return i ? Array.from(i.entries() || []).filter((r) => !t || t.length == 0 || t.indexOf(r[0]) >= 0).map((r) => r[1]) : [];
+    let r = this.groupedregistry.get(e);
+    return r ? Array.from(r.entries() || []).filter((i) => !t || t.length == 0 || t.indexOf(i[0]) >= 0).map((i) => i[1]) : [];
   }
   getGroupComponentsKeys(e) {
     let t = this.groupedregistry.get(e);
     return t ? Array.from(t.keys()) : [];
   }
-  provideService(e, t, i) {
-    if (this.serviceregistry.set(e, t), i) {
-      this.groupedserviceregistry.has(i) || this.groupedserviceregistry.set(i, /* @__PURE__ */ new Map());
-      let r = this.groupedserviceregistry.get(i);
-      r && r.set(e, t);
+  provideService(e, t, r) {
+    if (this.serviceregistry.set(e, t), r) {
+      this.groupedserviceregistry.has(r) || this.groupedserviceregistry.set(r, /* @__PURE__ */ new Map());
+      let i = this.groupedserviceregistry.get(r);
+      i && i.set(e, t);
     }
   }
   getService(e) {
     return this.serviceregistry.get(e) || null;
   }
   getGroupServices(e, ...t) {
-    let i = this.groupedserviceregistry.get(e);
-    return i ? Array.from(i.entries() || []).filter((r) => !t || t.length == 0 || t.indexOf(r[0]) >= 0).map((r) => r[1]) : [];
+    let r = this.groupedserviceregistry.get(e);
+    return r ? Array.from(r.entries() || []).filter((i) => !t || t.length == 0 || t.indexOf(i[0]) >= 0).map((i) => i[1]) : [];
   }
 };
-let l = x;
-o(l, "instance", new x());
-const p = class {
+let f = M;
+l(f, "instance", new M());
+const I = class {
   constructor() {
-    o(this, "notifier", new A());
+    l(this, "notifier", new A());
   }
   static get Instance() {
-    return p.instance;
+    return I.instance;
   }
   static set Instance(e) {
     this.instance = e;
@@ -139,38 +139,39 @@ const p = class {
   send(e, ...t) {
     this.notifier.emit(e, ...t);
   }
-  subscribe(e, t, i) {
-    this.notifier.on(e, t, i);
+  subscribe(e, t, r) {
+    this.notifier.on(e, t, r);
   }
-  once(e, t, i) {
-    this.notifier.once(e, t, i);
+  once(e, t, r) {
+    this.notifier.once(e, t, r);
   }
   unsubscribe(e, t) {
     this.notifier.off(e, t);
   }
   ask(e, ...t) {
-    return new Promise((i, r) => {
+    return new Promise((r, i) => {
       this.notifier.emit(`$ask-${e}`, {
-        resolve: i,
-        reject: r,
+        resolve: r,
+        reject: i,
         args: t
       });
     });
   }
   reply(e, t) {
-    this.notifier.on(`$ask-${e}`, (i) => {
+    this.notifier.on(`$ask-${e}`, (r) => {
       try {
-        let r = t(...i.args);
-        i.resolve(r);
+        let i = t(...r.args);
+        r.resolve(i);
       } catch {
-        i.reject();
+        r.reject();
       }
     });
   }
 };
-let h = p;
-o(h, "instance", new p());
-const V = C({
+let v = I;
+l(v, "instance", new I());
+const z = T({
+  name: "inject",
   props: {
     id: { default: null },
     type: { default: null, type: String },
@@ -182,14 +183,13 @@ const V = C({
     disabled: { type: Boolean, default: !1 },
     readonly: { type: Boolean, default: !1 }
   },
-  template: '<div><component :is="c" v-for="(c, idx) in Components" :disabled="disabled" :readonly="readonly" :key="idx" :id="id" :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" /></div>',
   setup(n, { emit: e }) {
-    const t = w({
+    const t = C({
       get: () => n.value,
       set: (u) => {
         e("input", u);
       }
-    }), i = w(() => n.name ? [l.Instance.getComponent(n.name, n.group)] : n.group ? l.Instance.getGroupComponents(n.group, ...n.names || []) : l.Instance.getComponents(...n.names || [])), r = (...u) => {
+    }), r = C(() => n.name ? [f.Instance.getComponent(n.name, n.group)] : n.group ? f.Instance.getGroupComponents(n.group, ...n.names || []) : f.Instance.getComponents(...n.names || [])), i = (...u) => {
       e("click", ...u);
     }, s = (...u) => {
       e("save", ...u);
@@ -204,19 +204,64 @@ const V = C({
       metadata: n.metadata,
       disabled: n.disabled,
       readonly: n.readonly,
-      click: r,
+      click: i,
       save: s,
-      Components: i,
+      Components: r,
       Value: t
     };
   }
-}), y = class {
+});
+function R(n, e, t, r, i, s, u, o) {
+  var a = typeof n == "function" ? n.options : n;
+  e && (a.render = e, a.staticRenderFns = t, a._compiled = !0), r && (a.functional = !0), s && (a._scopeId = "data-v-" + s);
+  var c;
+  if (u ? (c = function(d) {
+    d = d || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext, !d && typeof __VUE_SSR_CONTEXT__ < "u" && (d = __VUE_SSR_CONTEXT__), i && i.call(this, d), d && d._registeredComponents && d._registeredComponents.add(u);
+  }, a._ssrRegister = c) : i && (c = o ? function() {
+    i.call(
+      this,
+      (a.functional ? this.parent : this).$root.$options.shadowRoot
+    );
+  } : i), c)
+    if (a.functional) {
+      a._injectStyles = c;
+      var j = a.render;
+      a.render = function(F, $) {
+        return c.call($), j(F, $);
+      };
+    } else {
+      var x = a.beforeCreate;
+      a.beforeCreate = x ? [].concat(x, c) : [c];
+    }
+  return {
+    exports: n,
+    options: a
+  };
+}
+var B = function() {
+  var e = this, t = e._self._c;
+  return e._self._setupProxy, t("div", e._l(e.Components, function(r, i) {
+    return t(r, { key: i, tag: "component", attrs: { disabled: e.disabled, readonly: e.readonly, id: e.id, type: e.type, metadata: e.metadata }, on: { click: e.click, save: e.save }, model: { value: e.Value, callback: function(s) {
+      e.Value = s;
+    }, expression: "Value" } });
+  }), 1);
+}, K = [], W = /* @__PURE__ */ R(
+  z,
+  B,
+  K,
+  !1,
+  null,
+  null,
+  null,
+  null
+);
+const N = W.exports, _ = class {
   constructor() {
-    o(this, "screens", /* @__PURE__ */ new Map());
-    o(this, "projecting", /* @__PURE__ */ new Map());
+    l(this, "screens", /* @__PURE__ */ new Map());
+    l(this, "projecting", /* @__PURE__ */ new Map());
   }
   static get Instance() {
-    return y.instance;
+    return _.instance;
   }
   static set Instance(e) {
     this.instance = e;
@@ -224,27 +269,27 @@ const V = C({
   setScreen(e, t = "defaultscreen") {
     this.screens.set(t, e);
   }
-  projectTo(e, t = null, i = "defaultscreen", r = !0, s = !1) {
+  projectTo(e, t = null, r = "defaultscreen", i = !0, s = !1) {
     var u = { data: t };
-    let a = s ? new Promise(($, O) => {
-      u.reject = O, u.resolve = $;
+    let o = s ? new Promise((c, j) => {
+      u.reject = j, u.resolve = c;
     }) : null;
-    r ? (this.projecting.has(i) || this.projecting.set(i, []), (this.projecting.get(i) || []).push({ component: e, model: u, promise: a, queue: r })) : this.projecting.set(i, [{ component: e, model: u, promise: a, queue: r }]);
-    let c = this.screens.get(i);
-    return c ? (c.model.value = u, c.currentView.value = e, a && a.then(() => this.stopProjecting(i)).catch(() => this.stopProjecting(i)), a) : null;
+    i ? (this.projecting.has(r) || this.projecting.set(r, []), (this.projecting.get(r) || []).push({ component: e, model: u, promise: o, queue: i })) : this.projecting.set(r, [{ component: e, model: u, promise: o, queue: i }]);
+    let a = this.screens.get(r);
+    return a ? (a.model.value = u, a.currentView.value = e, o && o.then(() => this.stopProjecting(r)).catch(() => this.stopProjecting(r)), o) : null;
   }
-  projectAsyncTo(e, t, i = "defaultscreen", r = !0) {
-    return this.projectTo(e, t, i, r, !0);
+  projectAsyncTo(e, t, r = "defaultscreen", i = !0) {
+    return this.projectTo(e, t, r, i, !0);
   }
   stopProjecting(e = "defaultscreen") {
     this.projecting.has(e) && (this.projecting.get(e) || []).pop();
     let t = this.screens.get(e);
     if (t && t.currentView) {
       if (t.model.value = null, t.screenModel.value = null, this.projecting.has(e)) {
-        let i = this.projecting.get(e);
-        if (i && i.length) {
-          let r = i.pop();
-          r && this.projectTo(r.component, r.model, e, r.queue, !!r.promise);
+        let r = this.projecting.get(e);
+        if (r && r.length) {
+          let i = r.pop();
+          i && this.projectTo(i.component, i.model, e, i.queue, !!i.promise);
         }
       }
       return !0;
@@ -252,65 +297,78 @@ const V = C({
     return !1;
   }
 };
-let g = y;
-o(g, "instance", new y());
-const D = C({
+let m = _;
+l(m, "instance", new _());
+const J = T({
   name: "screen",
   props: {
     name: { type: String, default: "defaultscreen" }
   },
-  template: '<div v-show="isVisible"><component v-if="currentView" v-bind:is="currentView" :value="model" :key="model"></component></div>',
   setup(n, { expose: e }) {
-    const t = P(), i = S(null), r = S(null);
-    e({ currentView: i, model: r });
-    const s = w(() => i.value != null);
-    return L(() => {
-      g.Instance.setScreen(t, n.name);
+    const t = L(), r = V(null), i = V(null);
+    e({ currentView: r, model: i });
+    const s = C(() => r.value != null);
+    return X(() => {
+      m.Instance.setScreen(t, n.name);
     }), {
-      currentView: i,
-      model: r,
+      currentView: r,
+      model: i,
       isVisible: s
     };
   }
-}), B = {
+});
+var Q = function() {
+  var e = this, t = e._self._c;
+  return e._self._setupProxy, t("div", { directives: [{ name: "show", rawName: "v-show", value: e.isVisible, expression: "isVisible" }] }, [e.currentView ? t(e.currentView, { key: e.model, tag: "component", attrs: { value: e.model } }) : e._e()], 1);
+}, Y = [], Z = /* @__PURE__ */ R(
+  J,
+  Q,
+  Y,
+  !1,
+  null,
+  null,
+  null,
+  null
+);
+const O = Z.exports, q = {
   inserted: (n, e) => {
-    d.Instance.injectTo(n, e.arg);
+    h.Instance.injectTo(n, e.arg);
   },
   unbind: (n, e) => {
-    d.Instance.removeFrom(n, e.arg);
+    h.Instance.removeFrom(n, e.arg);
   }
-}, F = {
+}, H = {
   bind: (n, e) => {
-    !n || d.Instance.setScreen(n, e.arg);
+    !n || h.Instance.setScreen(n, e.arg);
   }
-}, M = {
-  projectToDirective: B,
-  screenDirective: F
-}, I = class {
+}, b = {
+  projectToDirective: q,
+  screenDirective: H
+}, w = class {
   constructor() {
-    o(this, "screens", /* @__PURE__ */ new Map());
+    l(this, "screens", /* @__PURE__ */ new Map());
   }
   static get Instance() {
-    return I.instance;
+    return w.instance;
   }
   static set Instance(e) {
     this.instance = e;
   }
   injectTo(e, t) {
     if (!(!e || !t)) {
-      var i = this.screens.has(t) ? this.screens.get(t) : null;
+      var r = this.screens.has(t) ? this.screens.get(t) : null;
       try {
         e.parentElement && e.removeChild(e);
       } catch {
       }
-      i && i.append(e);
+      r && r.append(e);
     }
   }
   removeFrom(e, t) {
     if (!(!e || !t)) {
-      var i = this.screens.has(t) ? this.screens.get(t) : null;
+      var r = this.screens.has(t) ? this.screens.get(t) : null;
       try {
-        i && i.removeChild(e);
+        r && r.removeChild(e);
       } catch {
       }
     }
@@ -319,13 +377,13 @@ const D = C({
     this.screens.set(t, e);
   }
 };
-let d = I;
-o(d, "instance", new I());
-function v(n, e) {
+let h = w;
+l(h, "instance", new w());
+function p(n, e) {
   if (n.target.validity) {
     let t = n.target;
     if (t.validity) {
-      let i = [
+      let r = [
         t.validity.badInput ? "bad input" : null,
         t.validity.customError ? "custom error" : null,
         t.validity.patternMismatch ? "pattern mismatch" : null,
@@ -336,86 +394,94 @@ function v(n, e) {
         t.validity.tooShort ? "too short" : null,
         t.validity.typeMismatch ? "type mismatch" : null,
         t.validity.valueMissing ? "value missing" : null
-      ].filter((r) => !!r);
-      e(i, t.validity.valid != null ? t.validity.valid : !0);
+      ].filter((i) => !!i);
+      e(r, t.validity.valid != null ? t.validity.valid : !0);
     }
   }
 }
-const E = {
+const P = {
   inserted: (n, e) => {
     if (!(!n || !n.willValidate)) {
       switch (n.nodeName) {
         case "INPUT":
         case "TEXTAREA":
-          n.onblur = (t) => v(t, e.value);
+          n.onblur = (t) => p(t, e.value);
           break;
         case "SELECT":
-          n.onchange = (t) => v(t, e.value);
+          n.onchange = (t) => p(t, e.value);
           break;
       }
-      n.oninvalid = (t) => v(t, e.value), n.form && n.form.addEventListener("invalid", () => v({ target: n }, e.value)), e.arg == "immediate" ? n.reportValidity() : v({ target: n }, e.value);
+      n.oninvalid = (t) => p(t, e.value), n.form && n.form.addEventListener("invalid", () => p({ target: n }, e.value)), e.arg == "immediate" ? n.reportValidity() : p({ target: n }, e.value);
     }
   },
   unbind: (n) => {
   }
 };
-function R(n) {
-  n.component("screen", D), n.component("inject", V), n.directive("screen", M.screenDirective), n.directive("projectTo", M.projectToDirective), n.directive("validate", E);
+function ee(n) {
+  console.debug("installing vue mf module"), n.component("screen", O), n.component("inject", N), n.directive("screen", b.screenDirective), n.directive("projectTo", b.projectToDirective), n.directive("validate", P);
 }
-function X(n) {
+function ie(n) {
   let e = {};
   return {
-    init(t, i, r, s) {
-      return s.registry && (l.Instance = s.registry), s.messageService && (h.Instance = s.messageService), s.projector && (g.Instance = s.projector), s.screens && (d.Instance = s.screens), e = r, n.init(U, t, i, r);
+    init(t, r, i, s) {
+      return s.registry && (f.Instance = s.registry), s.messageService && (v.Instance = s.messageService), s.projector && (m.Instance = s.projector), s.screens && (h.Instance = s.screens), e = i, n.init(te, t, r, i);
     },
-    config(t, i) {
-      return n.config ? n.config(t, i, e) : null;
+    config(t, r) {
+      return n.config ? n.config(t, r, e) : null;
     },
-    run(t, i) {
-      return n.run ? n.run(t, i, e) : null;
+    run(t, r) {
+      return n.run ? n.run(t, r, e) : null;
     },
     routes: n.routes
   };
 }
-function J(n, e, t) {
-  const i = n.default.default || n.default;
-  return i.init(
-    f.Instance,
+function se(n, e, t) {
+  const r = n.default.default || n.default;
+  return r.init(
+    g.Instance,
     e,
     t || {},
     {
-      registry: l.Instance,
-      messageService: h.Instance,
-      projector: g.Instance,
-      screens: d.Instance
+      registry: f.Instance,
+      messageService: v.Instance,
+      projector: m.Instance,
+      screens: h.Instance
     }
-  ).then(() => i);
+  ).then(() => r);
 }
-function Q(n, e) {
-  return (n.default.default || n.default).config(f.Instance, e);
+function ae(n, e) {
+  return (n.default.default || n.default).config(g.Instance, e);
 }
-function W(n, e) {
-  return (n.default.default || n.default).run(f.Instance, e);
+function oe(n, e) {
+  return (n.default.default || n.default).run(g.Instance, e);
 }
-function Y(n) {
+function ue(n) {
   return (n.default.default || n.default).routes;
 }
-const U = {
-  install: R,
-  MenuHelper: new f(),
-  menuType: b,
-  CommonRegistry: new l(),
-  MessageService: new h(),
-  Inject: V,
-  Screen: D,
-  ValidateDirective: E,
-  MenuNotifications: T
+const te = {
+  install: ee,
+  MenuHelper: new g(),
+  menuType: D,
+  CommonRegistry: new f(),
+  MessageService: new v(),
+  Inject: N,
+  Screen: O,
+  ValidateDirective: P,
+  MenuNotifications: E
 };
 export {
-  Q as ConfigModule,
-  J as InitModule,
-  X as ModuleInitializer,
-  Y as ModuleRoutes,
-  W as RunModule,
-  U as default
+  f as CommonRegistry,
+  ae as ConfigModule,
+  se as InitModule,
+  N as Inject,
+  g as MenuHelper,
+  E as MenuNotifications,
+  v as MessageService,
+  ie as ModuleInitializer,
+  ue as ModuleRoutes,
+  oe as RunModule,
+  O as Screen,
+  P as ValidateDirective,
+  te as default,
+  D as menuType
 };
