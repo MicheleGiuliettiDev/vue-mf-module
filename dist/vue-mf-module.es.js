@@ -168,8 +168,8 @@ const I = class {
     });
   }
 };
-let v = I;
-l(v, "instance", new I());
+let m = I;
+l(m, "instance", new I());
 const z = T({
   name: "inject",
   props: {
@@ -297,8 +297,8 @@ const N = W.exports, _ = class {
     return !1;
   }
 };
-let m = _;
-l(m, "instance", new _());
+let v = _;
+l(v, "instance", new _());
 const J = T({
   name: "screen",
   props: {
@@ -309,7 +309,7 @@ const J = T({
     e({ currentView: r, model: i });
     const s = C(() => r.value != null);
     return X(() => {
-      m.Instance.setScreen(t, n.name);
+      v.Instance.setScreen(t, n.name);
     }), {
       currentView: r,
       model: i,
@@ -424,7 +424,7 @@ function ie(n) {
   let e = {};
   return {
     init(t, r, i, s) {
-      return s.registry && (f.Instance = s.registry), s.messageService && (v.Instance = s.messageService), s.projector && (m.Instance = s.projector), s.screens && (h.Instance = s.screens), e = i, n.init(te, t, r, i);
+      return s.registry && (f.Instance = s.registry), s.messageService && (m.Instance = s.messageService), s.projector && (v.Instance = s.projector), s.screens && (h.Instance = s.screens), e = i, n.init(te, t, r, i);
     },
     config(t, r) {
       return n.config ? n.config(t, r, e) : null;
@@ -443,8 +443,8 @@ function se(n, e, t) {
     t || {},
     {
       registry: f.Instance,
-      messageService: v.Instance,
-      projector: m.Instance,
+      messageService: m.Instance,
+      projector: v.Instance,
       screens: h.Instance
     }
   ).then(() => r);
@@ -463,11 +463,12 @@ const te = {
   MenuHelper: new g(),
   menuType: D,
   CommonRegistry: new f(),
-  MessageService: new v(),
+  MessageService: new m(),
   Inject: N,
   Screen: O,
   ValidateDirective: P,
-  MenuNotifications: E
+  MenuNotifications: E,
+  Projector: v
 };
 export {
   f as CommonRegistry,
@@ -476,9 +477,10 @@ export {
   N as Inject,
   g as MenuHelper,
   E as MenuNotifications,
-  v as MessageService,
+  m as MessageService,
   ie as ModuleInitializer,
   ue as ModuleRoutes,
+  v as Projector,
   oe as RunModule,
   O as Screen,
   P as ValidateDirective,

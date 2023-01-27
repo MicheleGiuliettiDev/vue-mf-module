@@ -116,7 +116,8 @@ export {
   ValidateDirective,
   type Projectable,
   type IProjectableModel,
-  MenuNotifications
+  MenuNotifications,
+  Projector,
 }
 
 const VueMfModule = {
@@ -128,7 +129,8 @@ const VueMfModule = {
   Inject,
   Screen,
   ValidateDirective,
-  MenuNotifications
+  MenuNotifications,
+  Projector
 }
 
 export default VueMfModule;

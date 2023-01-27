@@ -32,7 +32,7 @@ export declare function InitModule(module: any, store: IStore, configuration: an
 export declare function ConfigModule(module: any, store: IStore): Promise<void>;
 export declare function RunModule(module: any, store: IStore): Promise<void>;
 export declare function ModuleRoutes(module: any): IRouteConfig[];
-export { MenuHelper, type IMenuDefinition, menuType, CommonRegistry, MessageService, Inject, Screen, ValidateDirective, type Projectable, type IProjectableModel, MenuNotifications };
+export { MenuHelper, type IMenuDefinition, menuType, CommonRegistry, MessageService, Inject, Screen, ValidateDirective, type Projectable, type IProjectableModel, MenuNotifications, Projector, };
 declare const VueMfModule: {
     install: typeof install;
     MenuHelper: MenuHelper;
@@ -187,5 +187,6 @@ declare const VueMfModule: {
     MenuNotifications: {
         menuDefinitionAdded: string;
     };
+    Projector: typeof Projector;
 };
 export default VueMfModule;
