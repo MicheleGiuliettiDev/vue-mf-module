@@ -166,7 +166,8 @@ declare const VueMfModule: {
             default: string;
         };
     }, {
-        currentView: import("vue").Ref<any>;
+        currentViewUID: import("vue").ComputedRef<any>;
+        currentView: import("vue").Ref<import("vue").Component<import("vue/types/options").DefaultData<never>, import("vue/types/options").DefaultMethods<never>, import("vue/types/options").DefaultComputed, import("vue/types/options").DefaultProps, {}>>;
         model: import("vue").Ref<IProjectableModel<any> | null>;
         isVisible: import("vue").ComputedRef<boolean>;
     }, {}, {}, {}, import("vue/types/v3-component-options").ComponentOptionsMixin, import("vue/types/v3-component-options").ComponentOptionsMixin, {}, string, Readonly<import("vue").ExtractPropTypes<{

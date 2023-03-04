@@ -1,10 +1,10 @@
 <template>
   <div v-show="isVisible">
-    <component v-if="currentView" v-bind:is="currentView" :value="model" :key="model"></component>
+    <component v-if="currentView" v-bind:is="currentView" :value="model" :key="currentViewUID"></component>
   </div>
 </template>
 <script lang="ts">
-import Vue, { computed, defineComponent, getCurrentInstance, onMounted, Ref, ref } from "vue";
+import { Component, ComponentPublicInstance, computed, defineComponent, getCurrentInstance, onMounted, Ref, ref, watch } from "vue";
 import { IProjectableModel, Projector } from "../helpers/Projector";
 
 export default defineComponent({
@@ -16,7 +16,7 @@ export default defineComponent({
 
     const me = getCurrentInstance();
 
-    const currentView: Ref<any> = ref(null);
+    const currentView: Ref<Component> = ref(null!);
     const model: Ref<IProjectableModel<any> | null> = ref(null!);
 
     expose({ currentView, model })
@@ -25,15 +25,21 @@ export default defineComponent({
       return currentView.value != null;
     })
 
+    const currentViewUID = computed(() => {
+      return (currentView.value as any)?.__file
+    })
+
     onMounted(() => {
-      Projector.Instance.setScreen(me, props.name);
+      Projector.Instance.setScreen((me as any).proxy, props.name);
     })
 
     return {
+      currentViewUID,
       currentView,
       model,
       isVisible
     }
-  }
+  },
+
 })
 </script>

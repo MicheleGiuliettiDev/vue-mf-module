@@ -15,5 +15,5 @@ export declare class ScreensManager {
     private screens;
     injectTo(domElement: Element, screen: string): void;
     removeFrom(domElement: Element, screen: string): void;
-    setScreen(screen: any, name?: string): void;
+    setScreen(screen: Element, name?: string): void;
 }

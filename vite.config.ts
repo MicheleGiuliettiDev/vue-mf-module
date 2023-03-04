@@ -4,7 +4,7 @@ import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  resolve:{
+  resolve: {
     alias: []
   },
   plugins: [
@@ -27,6 +27,7 @@ export default defineConfig({
       // into your library
       external: ['vue'],
       output: {
+        sourcemap: "inline",
         exports: "named",
         // Provide global variables to use in the UMD build
         // for externalized deps

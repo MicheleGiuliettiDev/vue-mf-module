@@ -40,7 +40,7 @@ export class ScreensManager {
     try { if (element) element.removeChild(domElement) } catch { }
   }
 
-  setScreen(screen: any, name: string = "defaultscreen") {
+  setScreen(screen: Element, name: string = "defaultscreen") {
     this.screens.set(name, screen);
   }
 }

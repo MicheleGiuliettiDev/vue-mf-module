@@ -12,7 +12,6 @@ import { validate as ValidateDirective } from "./directives/validate";
 
 
 function install(Vue: VueConstructor) {
-  console.debug("installing vue mf module")
   Vue.component("screen", Screen);
   Vue.component("inject", Inject);
   Vue.directive("screen", directives.screenDirective);

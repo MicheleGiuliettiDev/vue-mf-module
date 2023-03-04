@@ -1,4 +1,4 @@
-import { VueConstructor } from "vue/types/umd";
+import { Component, ComponentPublicInstance } from "vue";
 export interface IProjectableModel<T> {
     data: T;
     resolve: (item: T) => void;
@@ -10,9 +10,9 @@ export declare class Projector {
     static set Instance(v: Projector);
     private screens;
     private projecting;
-    setScreen(screen: any, name?: string): void;
-    projectTo<T>(component: VueConstructor, data?: T | null, screen?: string, queue?: boolean, async?: boolean): Promise<T> | null;
-    projectAsyncTo<T>(component: VueConstructor, data: T, screen?: string, queue?: boolean): Promise<T> | null;
+    setScreen(screen: ComponentPublicInstance, name?: string): void;
+    projectTo<T>(component: Component, data?: T | null, screen?: string, queue?: boolean, async?: boolean): Promise<T> | null;
+    projectAsyncTo<T>(component: Component, data: T, screen?: string, queue?: boolean): Promise<T> | null;
     stopProjecting(screen?: string): boolean;
 }
 export interface Projectable<T> {
