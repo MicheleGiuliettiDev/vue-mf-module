@@ -124,7 +124,7 @@ const VueMfModule = {
   MenuHelper: new MenuHelper(),
   menuType,
   CommonRegistry: new CommonRegistry(),
-  MessageService: new MessageService(),
+  MessageService: MessageService,
   Inject,
   Screen,
   ValidateDirective,
