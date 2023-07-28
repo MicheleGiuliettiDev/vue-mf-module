@@ -15,9 +15,9 @@ interface RouteConfigMultipleViews extends _RouteConfigBase {
     components?: Dictionary<any>;
     props?: Dictionary<boolean | Object | RoutePropsFunction>;
 }
-declare type RoutePropsFunction = (route: any) => Object;
-declare type Dictionary<T> = {
+type RoutePropsFunction = (route: any) => Object;
+type Dictionary<T> = {
     [key: string]: T;
 };
-export declare type IRouteConfig = RouteConfigSingleView | RouteConfigMultipleViews;
+export type IRouteConfig = RouteConfigSingleView | RouteConfigMultipleViews;
 export {};

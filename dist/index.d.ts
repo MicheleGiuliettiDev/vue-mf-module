@@ -38,7 +38,18 @@ declare const VueMfModule: {
     MenuHelper: MenuHelper;
     menuType: typeof menuType;
     CommonRegistry: CommonRegistry;
-    MessageService: MessageService;
+    MessageService: {
+        Instance: {
+            ask: <T>(name: string, ...args: any[]) => Promise<T>;
+            reply: (name: string, cb: (...args: any[]) => any, opts?: {
+                force: boolean;
+            }) => () => void;
+            send: (name: string, ...args: any[]) => void;
+            subscribe: (name: string, cb: (...args: any[]) => any) => () => void;
+            once: (name: string, cb: (...args: any[]) => any) => void;
+            unsubscibe: (name: string, cb: (...args: any[]) => any) => void;
+        };
+    };
     Inject: import("vue").DefineComponent<{
         id: {
             default: null;
@@ -62,11 +73,11 @@ declare const VueMfModule: {
                 new (...items: string[]): string[];
                 isArray(arg: any): arg is any[];
                 readonly prototype: any[];
-                from<T>(arrayLike: ArrayLike<T>): T[];
-                from<T_1, U>(arrayLike: ArrayLike<T_1>, mapfn: (v: T_1, k: number) => U, thisArg?: any): U[];
-                from<T_2>(iterable: Iterable<T_2> | ArrayLike<T_2>): T_2[];
-                from<T_3, U_1>(iterable: Iterable<T_3> | ArrayLike<T_3>, mapfn: (v: T_3, k: number) => U_1, thisArg?: any): U_1[];
-                of<T_4>(...items: T_4[]): T_4[];
+                from<T_1>(arrayLike: ArrayLike<T_1>): T_1[];
+                from<T_2, U>(arrayLike: ArrayLike<T_2>, mapfn: (v: T_2, k: number) => U, thisArg?: any): U[];
+                from<T_3>(iterable: Iterable<T_3> | ArrayLike<T_3>): T_3[];
+                from<T_4, U_1>(iterable: Iterable<T_4> | ArrayLike<T_4>, mapfn: (v: T_4, k: number) => U_1, thisArg?: any): U_1[];
+                of<T_5>(...items: T_5[]): T_5[];
                 readonly [Symbol.species]: ArrayConstructor;
             };
             default: null;
@@ -124,11 +135,11 @@ declare const VueMfModule: {
                 new (...items: string[]): string[];
                 isArray(arg: any): arg is any[];
                 readonly prototype: any[];
-                from<T>(arrayLike: ArrayLike<T>): T[];
-                from<T_1, U>(arrayLike: ArrayLike<T_1>, mapfn: (v: T_1, k: number) => U, thisArg?: any): U[];
-                from<T_2>(iterable: Iterable<T_2> | ArrayLike<T_2>): T_2[];
-                from<T_3, U_1>(iterable: Iterable<T_3> | ArrayLike<T_3>, mapfn: (v: T_3, k: number) => U_1, thisArg?: any): U_1[];
-                of<T_4>(...items: T_4[]): T_4[];
+                from<T_1>(arrayLike: ArrayLike<T_1>): T_1[];
+                from<T_2, U>(arrayLike: ArrayLike<T_2>, mapfn: (v: T_2, k: number) => U, thisArg?: any): U[];
+                from<T_3>(iterable: Iterable<T_3> | ArrayLike<T_3>): T_3[];
+                from<T_4, U_1>(iterable: Iterable<T_4> | ArrayLike<T_4>, mapfn: (v: T_4, k: number) => U_1, thisArg?: any): U_1[];
+                of<T_5>(...items: T_5[]): T_5[];
                 readonly [Symbol.species]: ArrayConstructor;
             };
             default: null;
