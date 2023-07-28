@@ -19,7 +19,7 @@ export interface IModuleInitializer {
 interface IModuleInitializerWrapper {
     init(menu: MenuHelper, store: IStore, configuration: any, options: {
         registry: CommonRegistry;
-        messageService: MessageService;
+        messageService: typeof MessageService.Instance;
         projector: Projector;
         screens: ScreensManager;
     }): Promise<void>;
