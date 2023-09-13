@@ -5,8 +5,8 @@ declare const reply: (name: string, cb: (...args: any[]) => Promise<any> | any, 
 declare const send: (name: string, ...args: any[]) => void;
 declare const subscribe: (name: string, cb: (...args: any[]) => any) => () => void;
 declare const once: (name: string, cb: (...args: any[]) => any) => void;
-declare const unsubscibe: (name: string, cb: (...args: any[]) => any) => void;
-export { ask, reply, send, subscribe, once, unsubscibe };
+declare const unsubscribe: (name: string, cb: (...args: any[]) => any) => void;
+export { ask, reply, send, subscribe, once, unsubscribe };
 export declare const MessageService: {
     Instance: {
         ask: <T>(name: string, ...args: any[]) => Promise<T>;

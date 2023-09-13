@@ -76,7 +76,7 @@ const once = (name: string, cb: (...args: any[]) => any) => {
   });
 }
 
-const unsubscibe = (name: string, cb: (...args: any[]) => any) => {
+const unsubscribe = (name: string, cb: (...args: any[]) => any) => {
   let port = sendSubscribeChannels.get(name)?.port2
   if (!port) return;
   const l = sendSubscribeCallbacks.get(cb);
@@ -92,7 +92,7 @@ export {
   send,
   subscribe,
   once,
-  unsubscibe
+  unsubscribe
 }
 
 export const MessageService = {
@@ -102,6 +102,6 @@ export const MessageService = {
     send,
     subscribe,
     once,
-    unsubscibe
+    unsubscibe: unsubscribe
   }
 }
