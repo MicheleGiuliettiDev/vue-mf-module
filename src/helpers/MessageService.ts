@@ -70,9 +70,9 @@ const subscribe = (name: string, cb: (...args: any[]) => any) => {
 }
 
 const once = (name: string, cb: (...args: any[]) => any) => {
-  const unsubscibe = subscribe(name, (...args: any[]) => {
+  const unsubscribe = subscribe(name, (...args: any[]) => {
     cb(...args);
-    unsubscibe();
+    unsubscribe();
   });
 }
 
