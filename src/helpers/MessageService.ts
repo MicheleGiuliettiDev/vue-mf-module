@@ -102,6 +102,6 @@ export const MessageService = {
     send,
     subscribe,
     once,
-    unsubscibe: unsubscribe
+    unsubscribe
   }
 }

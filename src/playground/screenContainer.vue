@@ -72,7 +72,7 @@ export default defineComponent({
     MessageService.Instance.subscribe("TEST-SUB", (v: string) => osubscribb.value = "osubcribb " + v);
 
     const unsubscribeByR = () => r();
-    const unsubscribeByC = () => MessageService.Instance.unsubscibe("TEST-SUB", stf)
+    const unsubscribeByC = () => MessageService.Instance.unsubscribe("TEST-SUB", stf)
     const once = ref("")
     MessageService.Instance.once("TEST-SUB", (v) => once.value = "once " + v)
 
