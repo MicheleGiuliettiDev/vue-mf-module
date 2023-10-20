@@ -1,21 +1,21 @@
 import { Component, Ref } from "vue";
 import { IProjectableModel } from "../helpers/Projector";
-declare const _sfc_main: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<{
     name: {
         type: StringConstructor;
         default: string;
     };
 }, {
     currentViewUID: import("vue").ComputedRef<any>;
-    currentView: Ref<Component<import("vue/types/options").DefaultData<never>, import("vue/types/options").DefaultMethods<never>, import("vue/types/options").DefaultComputed, import("vue/types/options").DefaultProps, {}>>;
+    currentView: Ref<Component>;
     model: Ref<IProjectableModel<any> | null>;
     isVisible: import("vue").ComputedRef<boolean>;
-}, {}, {}, {}, import("vue/types/v3-component-options").ComponentOptionsMixin, import("vue/types/v3-component-options").ComponentOptionsMixin, {}, string, Readonly<import("vue").ExtractPropTypes<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     name: {
         type: StringConstructor;
         default: string;
     };
 }>>, {
     name: string;
-}>;
-export default _sfc_main;
+}, {}>;
+export default _default;

@@ -1,4 +1,4 @@
-declare const _sfc_main: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<{
     id: {
         default: null;
     };
@@ -60,7 +60,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     save: (...args: any[]) => void;
     Components: import("vue").ComputedRef<any[]>;
     Value: import("vue").WritableComputedRef<null>;
-}, {}, {}, {}, import("vue/types/v3-component-options").ComponentOptionsMixin, import("vue/types/v3-component-options").ComponentOptionsMixin, {}, string, Readonly<import("vue").ExtractPropTypes<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     id: {
         default: null;
     };
@@ -110,13 +110,13 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }>>, {
     name: string;
-    value: null;
-    type: string;
     id: null;
+    type: string;
+    value: null;
     names: string[];
     group: string;
     metadata: Record<string, any>;
     disabled: boolean;
     readonly: boolean;
-}>;
-export default _sfc_main;
+}, {}>;
+export default _default;

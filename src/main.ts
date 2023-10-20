@@ -1,20 +1,17 @@
-import Vue from "vue";
+import { createApp } from "vue";
 
 
 import screen from "./components/screen.vue";
-Vue.component("screen", screen);
-
-
-
-
 
 import screenContainer from "./playground/screenContainer.vue";
 
-const app = new Vue({
-  render: h => h(screenContainer),
-});
+const app = createApp({
+  render: (h: Function) => h(screenContainer),
+})
 
-app.$mount("#app")
+app.component('screen', screen);
+
+app.mount("#app")
 
 
 

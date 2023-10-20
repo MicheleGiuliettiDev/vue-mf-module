@@ -3,13 +3,15 @@ import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
 import { IRouteConfig } from "./interfaces/RouterInterfaces";
 import { IStore } from "./interfaces/StoreInterfaces";
-import Inject from "./components/inject.vue";
-import Screen from "./components/screen.vue";
-import { VueConstructor } from "vue";
+import inject from './components/inject.vue';
+import screen from "./components/screen.vue";
 import { IProjectableModel, Projectable, Projector } from "./helpers/Projector";
 import { ScreensManager } from "./directives/screen";
 import { validate as ValidateDirective } from "./directives/validate";
-declare function install(Vue: VueConstructor): void;
+declare function install(Vue: {
+    component: any;
+    directive: any;
+}): void;
 export interface IModuleInitializer {
     init(vuemf: typeof VueMfModule, menu: MenuHelper, store: IStore, configuration: any): Promise<void>;
     config?(menu: MenuHelper, store: IStore, configuration: any): Promise<void>;
@@ -32,7 +34,7 @@ export declare function InitModule(module: any, store: IStore, configuration: an
 export declare function ConfigModule(module: any, store: IStore): Promise<void>;
 export declare function RunModule(module: any, store: IStore): Promise<void>;
 export declare function ModuleRoutes(module: any): IRouteConfig[];
-export { MenuHelper, type IMenuDefinition, menuType, CommonRegistry, MessageService, Inject, Screen, ValidateDirective, type Projectable, type IProjectableModel, MenuNotifications, Projector, };
+export { MenuHelper, type IMenuDefinition, menuType, CommonRegistry, MessageService, inject, screen, ValidateDirective, type Projectable, type IProjectableModel, MenuNotifications, Projector, };
 declare const VueMfModule: {
     install: typeof install;
     MenuHelper: MenuHelper;
@@ -50,7 +52,7 @@ declare const VueMfModule: {
             unsubscribe: (name: string, cb: (...args: any[]) => any) => void;
         };
     };
-    Inject: import("vue").DefineComponent<{
+    inject: import("vue").DefineComponent<{
         id: {
             default: null;
         };
@@ -112,7 +114,7 @@ declare const VueMfModule: {
         save: (...args: any[]) => void;
         Components: import("vue").ComputedRef<any[]>;
         Value: import("vue").WritableComputedRef<null>;
-    }, {}, {}, {}, import("vue/types/v3-component-options").ComponentOptionsMixin, import("vue/types/v3-component-options").ComponentOptionsMixin, {}, string, Readonly<import("vue").ExtractPropTypes<{
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
         id: {
             default: null;
         };
@@ -162,33 +164,33 @@ declare const VueMfModule: {
         };
     }>>, {
         name: string;
-        value: null;
-        type: string;
         id: null;
+        type: string;
+        value: null;
         names: string[];
         group: string;
         metadata: Record<string, any>;
         disabled: boolean;
         readonly: boolean;
-    }>;
-    Screen: import("vue").DefineComponent<{
+    }, {}>;
+    screen: import("vue").DefineComponent<{
         name: {
             type: StringConstructor;
             default: string;
         };
     }, {
         currentViewUID: import("vue").ComputedRef<any>;
-        currentView: import("vue").Ref<import("vue").Component<import("vue/types/options").DefaultData<never>, import("vue/types/options").DefaultMethods<never>, import("vue/types/options").DefaultComputed, import("vue/types/options").DefaultProps, {}>>;
+        currentView: import("vue").Ref<import("vue").Component>;
         model: import("vue").Ref<IProjectableModel<any> | null>;
         isVisible: import("vue").ComputedRef<boolean>;
-    }, {}, {}, {}, import("vue/types/v3-component-options").ComponentOptionsMixin, import("vue/types/v3-component-options").ComponentOptionsMixin, {}, string, Readonly<import("vue").ExtractPropTypes<{
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
         name: {
             type: StringConstructor;
             default: string;
         };
     }>>, {
         name: string;
-    }>;
+    }, {}>;
     ValidateDirective: {
         inserted: (el: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, bind: {
             value: (errors: string[], valid: boolean) => void;
