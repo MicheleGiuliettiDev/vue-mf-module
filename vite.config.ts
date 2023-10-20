@@ -14,7 +14,7 @@ export default defineConfig({
     dts({
       entryRoot: "./src/",
     })
-  ],
+  ], 
   build: {
     lib: {
       entry: "./src/index.ts",
