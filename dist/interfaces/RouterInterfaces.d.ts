@@ -1,7 +1,7 @@
 interface _RouteConfigBase {
     path: string;
     name?: string;
-    children?: IRouteConfig[];
+    children?: RouteRecordRaw[];
     redirect?: any;
     alias?: string | string[];
     meta?: any;
@@ -19,5 +19,5 @@ type RoutePropsFunction = (route: any) => Object;
 type Dictionary<T> = {
     [key: string]: T;
 };
-export type IRouteConfig = RouteConfigSingleView | RouteConfigMultipleViews;
+export type RouteRecordRaw = RouteConfigSingleView | RouteConfigMultipleViews;
 export {};

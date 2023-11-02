@@ -1,7 +1,7 @@
 import { MenuHelper, menuType, MenuNotifications, IMenuDefinition } from "./helpers/MenuHelper";
 import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
-import { IRouteConfig } from "./interfaces/RouterInterfaces";
+import { RouteRecordRaw } from "./interfaces/RouterInterfaces";
 import inject from './components/inject.vue';
 import screen from "./components/screen.vue";
 import { IProjectableModel, Projectable, Projector } from "./helpers/Projector";
@@ -15,7 +15,7 @@ export interface IModuleInitializer {
     init(vuemf: typeof VueMfModule, menu: MenuHelper, configuration: any): Promise<void>;
     config?(menu: MenuHelper, configuration: any): Promise<void>;
     run?(menu: MenuHelper, configuration: any): Promise<void>;
-    routes: IRouteConfig[];
+    routes: RouteRecordRaw[];
 }
 interface IModuleInitializerWrapper {
     init(menu: MenuHelper, configuration: any, options: {
@@ -26,7 +26,7 @@ interface IModuleInitializerWrapper {
     }): Promise<void>;
     config(menu: MenuHelper): Promise<void>;
     run(menu: MenuHelper): Promise<void>;
-    routes: IRouteConfig[];
+    routes: RouteRecordRaw[];
 }
 export declare function ModuleInitializer(opts: IModuleInitializer): IModuleInitializerWrapper;
 export declare function InitModule(module: {
@@ -34,7 +34,7 @@ export declare function InitModule(module: {
 }, configuration: any | undefined): Promise<IModuleInitializer>;
 export declare function ConfigModule(module: any): Promise<void>;
 export declare function RunModule(module: any): Promise<void>;
-export declare function ModuleRoutes(module: any): IRouteConfig[];
+export declare function ModuleRoutes(module: any): RouteRecordRaw[];
 export { MenuHelper, type IMenuDefinition, menuType, CommonRegistry, MessageService, inject, screen, ValidateDirective, type Projectable, type IProjectableModel, MenuNotifications, Projector, };
 declare const VueMfModule: {
     install: typeof install;

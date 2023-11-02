@@ -1,7 +1,7 @@
 import { MenuHelper, menuType, MenuNotifications, IMenuDefinition } from "./helpers/MenuHelper";
 import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
-import { IRouteConfig } from "./interfaces/RouterInterfaces";
+import { RouteRecordRaw } from "./interfaces/RouterInterfaces";
 import inject from './components/inject.vue';
 import screen from "./components/screen.vue";
 import { IProjectableModel, Projectable, Projector } from "./helpers/Projector";
@@ -25,7 +25,7 @@ export interface IModuleInitializer {
 
   run?(menu: MenuHelper, configuration: any): Promise<void>,
 
-  routes: IRouteConfig[]
+  routes: RouteRecordRaw[]
 }
 
 interface IModuleInitializerWrapper {
@@ -39,7 +39,7 @@ interface IModuleInitializerWrapper {
     }): Promise<void>,
   config(menu: MenuHelper): Promise<void>,
   run(menu: MenuHelper): Promise<void>,
-  routes: IRouteConfig[]
+  routes: RouteRecordRaw[]
 }
 
 export function ModuleInitializer(opts: IModuleInitializer) {
@@ -94,7 +94,7 @@ export function RunModule(module: any): Promise<void> {
   return initobj.run(MenuHelper.Instance);
 }
 
-export function ModuleRoutes(module: any): IRouteConfig[] {
+export function ModuleRoutes(module: any): RouteRecordRaw[] {
   const initobj = (module.default.default || module.default) as IModuleInitializerWrapper;
   return initobj.routes;
 }
