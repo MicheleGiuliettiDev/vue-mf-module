@@ -2,15 +2,14 @@ import { MenuHelper, menuType, MenuNotifications, IMenuDefinition } from "./help
 import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
 import { IRouteConfig } from "./interfaces/RouterInterfaces";
-import { IStore } from "./interfaces/StoreInterfaces";
-import inject  from './components/inject.vue';
+import inject from './components/inject.vue';
 import screen from "./components/screen.vue";
 import { IProjectableModel, Projectable, Projector } from "./helpers/Projector";
 import directives, { ScreensManager } from "./directives/screen";
 import { validate as ValidateDirective } from "./directives/validate";
 
 
-function install(Vue: {component: any, directive: any}) {
+function install(Vue: { component: any, directive: any }) {
   Vue.component("screen", screen);
   Vue.component("inject", inject);
   Vue.directive("screen", directives.screenDirective);
@@ -20,82 +19,79 @@ function install(Vue: {component: any, directive: any}) {
 
 
 export interface IModuleInitializer {
-  init(vuemf: typeof VueMfModule, menu: MenuHelper, store: IStore, configuration: any): Promise<void>,
+  init(vuemf: typeof VueMfModule, menu: MenuHelper, configuration: any): Promise<void>,
 
-  config?(menu: MenuHelper, store: IStore, configuration: any): Promise<void>,
+  config?(menu: MenuHelper, configuration: any): Promise<void>,
 
-  run?(menu: MenuHelper, store: IStore, configuration: any): Promise<void>,
+  run?(menu: MenuHelper, configuration: any): Promise<void>,
 
   routes: IRouteConfig[]
 }
 
 interface IModuleInitializerWrapper {
   init(menu: MenuHelper,
-       store: IStore,
-       configuration: any
+    configuration: any
     , options: {
-  registry: CommonRegistry,
-  messageService: typeof MessageService.Instance,
-  projector: Projector,
-  screens: ScreensManager
+      registry: CommonRegistry,
+      messageService: typeof MessageService.Instance,
+      projector: Projector,
+      screens: ScreensManager
     }): Promise<void>,
-    config(menu: MenuHelper,
-           store: IStore): Promise<void>,
-           run(menu: MenuHelper,
-               store: IStore): Promise<void>,
-               routes: IRouteConfig[]
+  config(menu: MenuHelper): Promise<void>,
+  run(menu: MenuHelper): Promise<void>,
+  routes: IRouteConfig[]
 }
 
 export function ModuleInitializer(opts: IModuleInitializer) {
   let moduleConfig = {};
   return {
-    init(menu: MenuHelper, store: IStore, configuration: any,
-         options: {
-           registry: CommonRegistry,
-           messageService: typeof MessageService.Instance,
-           projector: Projector,
-           screens: ScreensManager
-         }) {
+    init(menu: MenuHelper, configuration: any,
+      options: {
+        registry: CommonRegistry,
+        messageService: typeof MessageService.Instance,
+        projector: Projector,
+        screens: ScreensManager
+      }) {
 
-           if (options.registry) CommonRegistry.Instance = options.registry;
-           if (options.messageService) MessageService.Instance = options.messageService
-             if (options.projector) Projector.Instance = options.projector;
-           if (options.screens) ScreensManager.Instance = options.screens;
-           moduleConfig = configuration;
-           return opts.init(VueMfModule, menu, store, configuration);
-         },
-         config(menu: MenuHelper, store: IStore) {
-           return opts.config ? opts.config(menu, store, moduleConfig) : null;
-         },
-         run(menu: MenuHelper, store: IStore) {
-           return opts.run ? opts.run(menu, store, moduleConfig) : null;
-         },
-         routes: opts.routes
+      if (options.registry) CommonRegistry.Instance = options.registry;
+      if (options.messageService) MessageService.Instance = options.messageService
+      if (options.projector) Projector.Instance = options.projector;
+      if (options.screens) ScreensManager.Instance = options.screens;
+      moduleConfig = configuration;
+      return opts.init(VueMfModule, menu, configuration);
+    },
+    config(menu: MenuHelper) {
+      return opts.config ? opts.config(menu, moduleConfig) : null;
+    },
+    run(menu: MenuHelper) {
+      return opts.run ? opts.run(menu, moduleConfig) : null;
+    },
+    routes: opts.routes
   } as IModuleInitializerWrapper
 }
 
-export async function InitModule(module: any, store: IStore, configuration: any | undefined): Promise<IModuleInitializer> {
-  const initobj = (module.default.default || module.default) as IModuleInitializerWrapper;
-  return initobj.init(MenuHelper.Instance, store, configuration || {},
-                      {
-                        registry: CommonRegistry.Instance,
-                        messageService: MessageService.Instance,
-                        projector: Projector.Instance,
-                        screens: ScreensManager.Instance
-                      }).then(() => {
-                        return initobj as unknown as IModuleInitializer;
-                      });
+export async function InitModule(module: { default: IModuleInitializerWrapper }, configuration: any | undefined): Promise<IModuleInitializer> {
+  const initobj = ((module.default as any).default || module.default) as IModuleInitializerWrapper;
+  return initobj.init(MenuHelper.Instance, configuration || {},
+    {
+      registry: CommonRegistry.Instance,
+      messageService: MessageService.Instance,
+      projector: Projector.Instance,
+      screens: ScreensManager.Instance
+    }).then(() => {
+      return initobj as unknown as IModuleInitializer;
+    });
 }
 
-export function ConfigModule(module: any, store: IStore): Promise<void> {
+export function ConfigModule(module: any): Promise<void> {
   const initobj = (module.default.default || module.default) as IModuleInitializerWrapper;
-  return initobj.config(MenuHelper.Instance, store);
+  return initobj.config(MenuHelper.Instance);
 }
 
 
-export function RunModule(module: any, store: IStore): Promise<void> {
+export function RunModule(module: any): Promise<void> {
   const initobj = (module.default.default || module.default) as IModuleInitializerWrapper;
-  return initobj.run(MenuHelper.Instance, store);
+  return initobj.run(MenuHelper.Instance);
 }
 
 export function ModuleRoutes(module: any): IRouteConfig[] {

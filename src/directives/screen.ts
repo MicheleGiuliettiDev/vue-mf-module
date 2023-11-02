@@ -8,7 +8,6 @@ const projectToDirective = {
   }
 }
 
-
 const screenDirective = {
   bind: (el: any, binding: any) => {
     if (!el) return;
