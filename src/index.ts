@@ -1,13 +1,12 @@
 import { MenuHelper, menuType, MenuNotifications, IMenuDefinition } from "./helpers/MenuHelper";
 import { CommonRegistry } from "./helpers/CommonRegistry";
 import { MessageService } from "./helpers/MessageService";
-import { RouteRecordRaw } from "./interfaces/RouterInterfaces";
 import inject from './components/inject.vue';
 import screen from "./components/screen.vue";
 import { IProjectableModel, Projectable, Projector } from "./helpers/Projector";
 import directives, { ScreensManager } from "./directives/screen";
 import { validate as ValidateDirective } from "./directives/validate";
-
+import { RouteRecordRaw } from "vue-router";
 
 function install(Vue: { component: any, directive: any }) {
   Vue.component("screen", screen);
