@@ -11,8 +11,8 @@ export interface IMenuDefinition {
     hidden: () => boolean;
 }
 export declare enum menuType {
-    drawer = 0,
-    bottom = 1,
+    drawer = 0,// Drawer Menu
+    bottom = 1,// Bottom Menu
     header = 2
 }
 export declare const MenuNotifications: {

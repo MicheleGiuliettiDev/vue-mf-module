@@ -115,7 +115,7 @@ declare const VueMfModule: {
         save: (...args: any[]) => void;
         Components: import("vue").ComputedRef<any[]>;
         Value: import("vue").WritableComputedRef<null>;
-    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
         id: {
             default: null;
         };
@@ -184,7 +184,7 @@ declare const VueMfModule: {
         currentView: import("vue").Ref<import("vue").Component>;
         model: import("vue").Ref<IProjectableModel<any> | null>;
         isVisible: import("vue").ComputedRef<boolean>;
-    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
         name: {
             type: StringConstructor;
             default: string;

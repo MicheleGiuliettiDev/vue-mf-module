@@ -4,6 +4,7 @@
       :type="type" :metadata="metadata" v-model="Value" @click="click" @save="save" />
   </div>
 </template>
+
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { CommonRegistry } from "../helpers/CommonRegistry";

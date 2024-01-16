@@ -60,7 +60,7 @@ declare const _default: import("vue").DefineComponent<{
     save: (...args: any[]) => void;
     Components: import("vue").ComputedRef<any[]>;
     Value: import("vue").WritableComputedRef<null>;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     id: {
         default: null;
     };

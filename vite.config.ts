@@ -19,7 +19,7 @@ export default defineConfig({
     lib: {
       entry: "./src/index.ts",
       name: "VueMfModule",
-      fileName: (format) => `vue-mf-module.${format}.js`,
+      fileName: (format) => `index.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
